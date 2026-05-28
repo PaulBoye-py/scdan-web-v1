@@ -18,7 +18,7 @@ export default function NewsPage() {
     date: "2024-03-15",
     author: "Dr. Adebayo Ogundimu",
     category: "Program Launch",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/scdan-news.webp",
     featured: true,
   }
 
@@ -31,7 +31,7 @@ export default function NewsPage() {
       date: "2024-03-10",
       author: "Dr. Funmi Adeyemi",
       category: "Guidelines",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/scdan-news.webp",
     },
     {
       id: 3,
@@ -40,7 +40,7 @@ export default function NewsPage() {
       date: "2024-03-08",
       author: "SCDAN Communications",
       category: "Events",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/scdan-news.webp",
     },
     {
       id: 4,
@@ -50,7 +50,7 @@ export default function NewsPage() {
       date: "2024-03-05",
       author: "Dr. Chukwuma Okeke",
       category: "Research",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/scdan-news.webp",
     },
     {
       id: 5,
@@ -59,7 +59,7 @@ export default function NewsPage() {
       date: "2024-03-01",
       author: "Dr. Aisha Mohammed",
       category: "Partnership",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/scdan-news.webp",
     },
     {
       id: 6,
@@ -69,7 +69,7 @@ export default function NewsPage() {
       date: "2024-02-28",
       author: "Dr. Emeka Nwankwo",
       category: "Education",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/scdan-news.webp",
     },
     {
       id: 7,
@@ -79,7 +79,7 @@ export default function NewsPage() {
       date: "2024-02-25",
       author: "Dr. Grace Okafor",
       category: "Outreach",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/scdan-news.webp",
     },
   ]
 

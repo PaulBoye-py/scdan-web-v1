@@ -1,362 +1,309 @@
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Heart, Users, Stethoscope, Award, CreditCard, Shield } from "lucide-react"
-import Image from "next/image"
+import { Heart, Check, Users, Award, TrendingUp, ArrowRight } from "lucide-react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import Image from "next/image"
 
 export default function DonatePage() {
-  const donationTiers = [
-    {
-      amount: "₦5,000",
-      title: "Supporter",
-      description: "Provides basic dental supplies for one patient",
-      icon: Heart,
-      color: "bg-primary/10 text-primary",
-    },
-    {
-      amount: "₦15,000",
-      title: "Advocate",
-      description: "Funds dental care for three special needs patients",
-      icon: Users,
-      color: "bg-green-100 text-green-600",
-    },
-    {
-      amount: "₦25,000",
-      title: "Champion",
-      description: "Sponsors a dental professional's training program",
-      icon: Stethoscope,
-      color: "bg-orange-100 text-orange-600",
-    },
-    {
-      amount: "₦50,000",
-      title: "Guardian",
-      description: "Funds a complete community outreach program",
-      icon: Award,
-      color: "bg-purple-100 text-purple-600",
-    },
-  ]
-
-  const impactStats = [
-    {
-      number: "2,500+",
-      label: "Patients Treated",
-      description: "Special needs patients who received care through donations",
-    },
-    {
-      number: "150+",
-      label: "Professionals Trained",
-      description: "Dental professionals equipped with special care skills",
-    },
-    {
-      number: "25",
-      label: "Communities Reached",
-      description: "Underserved communities with mobile dental services",
-    },
-    {
-      number: "₦5M+",
-      label: "Total Impact",
-      description: "Value of care provided through donor support",
-    },
-  ]
-
-  const testimonials = [
-    {
-      name: "Mrs. Adunni Okafor",
-      role: "Parent",
-      content:
-        "Thanks to SCDAN's mobile unit, my autistic son received his first proper dental care. The team was so patient and understanding.",
-      image: "/placeholder.svg?height=80&width=80",
-    },
-    {
-      name: "Dr. Kemi Adebayo",
-      role: "Rural Dentist",
-      content:
-        "The training I received through SCDAN's donor-funded program transformed how I care for special needs patients in my community.",
-      image: "/placeholder.svg?height=80&width=80",
-    },
-  ]
-
   return (
     <div className="min-h-screen bg-white">
       <Header />
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-primary/80 text-white">
-        <div className="container mx-auto max-w-6xl px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <Badge className="bg-primary/90 text-white">Make a Difference</Badge>
-              <h1 className="text-4xl md:text-6xl font-bold leading-tight">Your Donation Changes Lives</h1>
-              <p className="text-xl text-primary-foreground/80 leading-relaxed">
-                Support SCDAN's mission to provide quality dental care to individuals with special healthcare needs
-                across Nigeria. Every donation directly impacts a life.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-white text-primary hover:bg-gray-100">
-                  <Heart className="mr-2 h-5 w-5" />
-                  Donate Now
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white text-white hover:bg-primary/80 bg-transparent"
-                >
-                  Learn About Impact
-                </Button>
-              </div>
-            </div>
-            <div className="relative">
-              <Image
-                src="/placeholder.svg?height=500&width=500"
-                alt="Impact of donations"
-                width={500}
-                height={500}
-                className="rounded-2xl shadow-2xl"
-              />
-            </div>
+      <section className="relative overflow-hidden pt-20 pb-16 bg-gradient-to-br from-slate-900 to-slate-800">
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="relative container mx-auto max-w-6xl px-4">
+          <div className="text-center max-w-3xl mx-auto">
+            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+              Make a <span className="text-primary">Real Impact</span>
+            </h1>
+            <p className="text-xl text-slate-300 leading-relaxed">
+              Every donation directly transforms the lives of special needs patients across Nigeria, providing access to quality dental care they deserve.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Impact Statistics */}
-      <section className="py-16 bg-gray-50">
+      {/* Impact Numbers */}
+      <section className="py-16 bg-slate-50 border-b border-slate-200">
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Your Impact in Numbers</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              See how donations have transformed lives and communities across Nigeria
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {impactStats.map((stat, index) => (
-              <Card key={index} className="border-0 shadow-lg text-center">
-                <CardHeader className="pb-4">
-                  <div className="text-4xl font-bold text-primary mb-2">{stat.number}</div>
-                  <CardTitle className="text-lg text-gray-900">{stat.label}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-gray-600">{stat.description}</CardDescription>
-                </CardContent>
-              </Card>
+          <div className="grid grid-cols-3 md:grid-cols-5 gap-6">
+            {[
+              { number: "2,500+", label: "Patients Treated" },
+              { number: "500+", label: "Members" },
+              { number: "₦50M+", label: "Donated" },
+              { number: "15+", label: "Years Active" },
+              { number: "100%", label: "Impact Focused" },
+            ].map((stat, i) => (
+              <div key={i} className="text-center">
+                <div className="text-2xl md:text-3xl font-bold text-primary mb-1">{stat.number}</div>
+                <p className="text-xs md:text-sm text-slate-600 font-medium">{stat.label}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Donation Tiers */}
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-white">
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Choose Your Impact Level</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Every contribution makes a difference. Choose the level that works for you.
-            </p>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-slate-900 mb-4">Choose Your Impact Level</h2>
+            <p className="text-lg text-slate-600">Select how you'd like to make a difference</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {donationTiers.map((tier, index) => (
-              <Card
-                key={index}
-                className="border-2 border-gray-200 hover:border-primary hover:shadow-lg transition-all cursor-pointer"
-              >
-                <CardHeader className="text-center pb-4">
-                  <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${tier.color}`}>
-                    <tier.icon className="h-8 w-8" />
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                amount: "₦5,000",
+                title: "Supporter",
+                impact: "Provides dental supplies for 1 patient",
+                features: ["Emergency dental care", "Supply kit", "Impact report"]
+              },
+              {
+                amount: "₦15,000",
+                title: "Advocate",
+                impact: "Treats 3 special needs patients",
+                features: ["Full dental treatment", "Follow-up care", "Monthly updates"]
+              },
+              {
+                amount: "₦25,000",
+                title: "Champion",
+                impact: "Sponsors professional training",
+                features: ["Practitioner training", "Certification program", "Quarterly report"]
+              },
+              {
+                amount: "₦50,000",
+                title: "Guardian",
+                impact: "Funds complete outreach program",
+                features: ["Community program", "Team support", "Annual recognition"]
+              },
+            ].map((tier, i) => (
+              <div key={i} className={`rounded-2xl overflow-hidden transition-all hover:shadow-xl ${
+                i === 2 ? 'ring-2 ring-primary md:scale-105' : ''
+              }`}>
+                <div className={`p-8 ${i === 2 ? 'bg-gradient-to-br from-primary to-primary/80 text-white' : 'bg-slate-50'}`}>
+                  {i === 2 && <div className="inline-block px-3 py-1 bg-white/20 rounded-full text-sm font-semibold mb-4">Most Popular</div>}
+
+                  <div className={`text-4xl font-bold mb-2 ${i === 2 ? 'text-white' : 'text-primary'}`}>
+                    {tier.amount}
                   </div>
-                  <div className="text-3xl font-bold text-gray-900 mb-2">{tier.amount}</div>
-                  <CardTitle className="text-xl text-gray-900">{tier.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="text-center">
-                  <CardDescription className="text-gray-600 mb-6">{tier.description}</CardDescription>
-                  <Button className="w-full bg-primary hover:bg-primary/90">Select Amount</Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+                  <h3 className={`text-2xl font-bold mb-2 ${i === 2 ? 'text-white' : 'text-slate-900'}`}>
+                    {tier.title}
+                  </h3>
+                  <p className={`text-sm mb-6 ${i === 2 ? 'text-white/90' : 'text-slate-600'}`}>
+                    {tier.impact}
+                  </p>
 
-      {/* Donation Form */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto max-w-4xl px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Make Your Donation</h2>
-            <p className="text-xl text-gray-600">Complete your donation securely and help us continue our mission</p>
-          </div>
-          <Card className="border-0 shadow-xl">
-            <CardHeader className="bg-primary text-white text-center">
-              <CardTitle className="text-2xl">Donation Form</CardTitle>
-              <CardDescription className="text-primary-foreground/80">
-                Your contribution is secure and tax-deductible
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-8">
-              <form className="space-y-6">
-                {/* Donation Type */}
-                <div className="space-y-3">
-                  <Label className="text-lg font-medium">Donation Type</Label>
-                  <RadioGroup defaultValue="one-time" className="flex gap-6">
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="one-time" id="one-time" />
-                      <Label htmlFor="one-time">One-time</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="monthly" id="monthly" />
-                      <Label htmlFor="monthly">Monthly</Label>
-                    </div>
-                  </RadioGroup>
-                </div>
+                  <Button className={`w-full mb-6 font-semibold ${
+                    i === 2
+                      ? 'bg-white text-primary hover:bg-slate-100'
+                      : 'bg-primary text-white hover:bg-primary/90'
+                  }`}>
+                    Donate Now
+                    <Heart className="ml-2 h-4 w-4" />
+                  </Button>
 
-                {/* Amount Selection */}
-                <div className="space-y-3">
-                  <Label className="text-lg font-medium">Donation Amount</Label>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    {["₦5,000", "₦15,000", "₦25,000", "₦50,000"].map((amount) => (
-                      <Button
-                        key={amount}
-                        type="button"
-                        variant="outline"
-                        className="h-12 border-2 hover:border-primary hover:bg-primary/5 bg-transparent"
-                      >
-                        {amount}
-                      </Button>
+                  <div className="space-y-3">
+                    {tier.features.map((feature, j) => (
+                      <div key={j} className="flex items-center gap-3">
+                        <Check className={`h-5 w-5 ${i === 2 ? 'text-white' : 'text-primary'}`} />
+                        <span className={`text-sm ${i === 2 ? 'text-white/90' : 'text-slate-700'}`}>
+                          {feature}
+                        </span>
+                      </div>
                     ))}
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">₦</span>
-                    <Input type="number" placeholder="Enter custom amount" className="flex-1" />
-                  </div>
                 </div>
-
-                {/* Personal Information */}
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName">First Name *</Label>
-                    <Input id="firstName" required />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name *</Label>
-                    <Input id="lastName" required />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email Address *</Label>
-                  <Input id="email" type="email" required />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Phone Number</Label>
-                  <Input id="phone" type="tel" />
-                </div>
-
-                {/* Dedication */}
-                <div className="space-y-2">
-                  <Label htmlFor="dedication">Dedication (Optional)</Label>
-                  <Textarea id="dedication" placeholder="In honor of... or In memory of..." rows={3} />
-                </div>
-
-                {/* Payment Method */}
-                <div className="space-y-3">
-                  <Label className="text-lg font-medium">Payment Method</Label>
-                  <div className="grid md:grid-cols-3 gap-3">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      className="h-16 border-2 hover:border-primary bg-transparent hover:bg-primary/5"
-                    >
-                      <CreditCard className="mr-2 h-5 w-5" />
-                      Credit Card
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      className="h-16 border-2 hover:border-primary bg-transparent hover:bg-primary/5"
-                    >
-                      Bank Transfer
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      className="h-16 border-2 hover:border-primary bg-transparent hover:bg-primary/5"
-                    >
-                      Mobile Money
-                    </Button>
-                  </div>
-                </div>
-
-                {/* Terms and Newsletter */}
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-2">
-                    <Checkbox id="newsletter" />
-                    <Label htmlFor="newsletter" className="text-sm">
-                      Subscribe to our newsletter for updates on our impact
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox id="terms" required />
-                    <Label htmlFor="terms" className="text-sm">
-                      I agree to the terms and conditions *
-                    </Label>
-                  </div>
-                </div>
-
-                {/* Security Notice */}
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                  <div className="flex items-center gap-3">
-                    <Shield className="h-5 w-5 text-green-600" />
-                    <div className="text-sm text-green-800">
-                      <strong>Secure Donation:</strong> Your payment information is encrypted and secure. We never store
-                      your payment details.
-                    </div>
-                  </div>
-                </div>
-
-                {/* Submit Button */}
-                <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90 text-lg py-6">
-                  <Heart className="mr-2 h-5 w-5" />
-                  Complete Donation
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-16 bg-white">
+      {/* How Donations Are Used */}
+      <section className="py-20 bg-slate-50">
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Stories of Impact</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Hear from those whose lives have been touched by your generosity
-            </p>
+          <h2 className="text-4xl font-bold text-slate-900 text-center mb-16">Where Your Money Goes</h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: Users,
+                title: "Patient Care",
+                percentage: "60%",
+                description: "Direct dental treatment and care for special needs patients"
+              },
+              {
+                icon: Award,
+                title: "Education & Training",
+                percentage: "25%",
+                description: "Professional development and continuing education for dentists"
+              },
+              {
+                icon: TrendingUp,
+                title: "Community Programs",
+                percentage: "15%",
+                description: "Outreach initiatives and public health campaigns"
+              },
+            ].map((use, i) => (
+              <div key={i} className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <use.icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <div className="text-3xl font-bold text-primary">{use.percentage}</div>
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">{use.title}</h3>
+                <p className="text-slate-600 leading-relaxed">{use.description}</p>
+              </div>
+            ))}
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="border-0 shadow-lg">
-                <CardContent className="p-8">
-                  <div className="flex items-start gap-4">
-                    <Image
-                      src={testimonial.image || "/placeholder.svg"}
-                      alt={testimonial.name}
-                      width={60}
-                      height={60}
-                      className="rounded-full"
-                    />
-                    <div className="flex-1">
-                      <p className="text-gray-600 italic mb-4">"{testimonial.content}"</p>
-                      <div>
-                        <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                        <div className="text-sm text-gray-500">{testimonial.role}</div>
-                      </div>
+        </div>
+      </section>
+
+      {/* Story/Testimonial Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl font-bold text-slate-900 mb-6">Your Impact in Action</h2>
+              <blockquote className="text-xl text-slate-700 leading-relaxed mb-8 border-l-4 border-primary pl-6 italic">
+                "Thanks to SCDAN and our donors, I was finally able to receive dental care. For years I thought I'd never be able to smile again. Now my confidence is restored."
+              </blockquote>
+              <p className="font-semibold text-slate-900">- Chioma, 28</p>
+              <p className="text-slate-600">Patient, Lagos</p>
+            </div>
+            <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-12">
+              <div className="space-y-6">
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Check className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 mb-1">100% Transparent</h4>
+                    <p className="text-slate-600">Full financial accountability and impact reporting</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Check className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 mb-1">Tax Deductible</h4>
+                    <p className="text-slate-600">SCDAN is a registered NGO offering tax benefits</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Check className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 mb-1">Monthly Updates</h4>
+                    <p className="text-slate-600">Receive impact reports showing how funds are used</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Bank Account Details */}
+      <section className="py-20 bg-gradient-to-br from-slate-50 to-slate-100">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
+              {/* Header */}
+              <div className="bg-gradient-to-r from-primary to-primary/90 px-8 py-12 text-center">
+                <h2 className="text-3xl font-bold text-white mb-2">Bank Transfer</h2>
+                <p className="text-primary/90">Donate directly to our account</p>
+              </div>
+
+              {/* Content */}
+              <div className="p-12">
+                <div className="flex items-center justify-center mb-10">
+                  <Image
+                    src="/union-bank-logo.png"
+                    alt="Union Bank of Nigeria"
+                    width={120}
+                    height={60}
+                    className="h-14 w-auto"
+                  />
+                </div>
+
+                <div className="space-y-8">
+                  {/* Account Name */}
+                  <div>
+                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Account Name</p>
+                    <p className="text-xl font-bold text-slate-900">Special Care Dentistry Association of Nigeria</p>
+                  </div>
+
+                  <div className="border-t border-slate-200"></div>
+
+                  {/* Account Number */}
+                  <div className="text-center">
+                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Account Number</p>
+                    <div className="bg-primary/5 rounded-lg p-4 border border-primary/20">
+                      <p className="text-3xl font-bold text-primary font-mono">0167563373</p>
                     </div>
+                  </div>
+
+                  <div className="border-t border-slate-200"></div>
+
+                  {/* Bank */}
+                  <div>
+                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Bank</p>
+                    <p className="text-lg font-semibold text-slate-900">Union Bank of Nigeria</p>
+                  </div>
+                </div>
+
+                {/* Footer Note */}
+                <div className="mt-10 pt-8 border-t border-slate-200">
+                  <p className="text-sm text-slate-600 text-center">
+                    <span className="font-semibold text-slate-900">💡 Tip:</span> Use your name as the transaction reference for tracking purposes
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Donation Methods */}
+      <section className="py-20 bg-slate-50">
+        <div className="container mx-auto max-w-6xl px-4">
+          <h2 className="text-4xl font-bold text-slate-900 text-center mb-16">Additional Ways to Support Us</h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Direct Transfer",
+                description: "Use the account details above for immediate bank transfers",
+                method: "Instant",
+              },
+              {
+                title: "Monthly Giving",
+                description: "Set up automatic recurring donations via bank transfer",
+                method: "Sustainable",
+              },
+              {
+                title: "Corporate Partnership",
+                description: "Partner with SCDAN for CSR initiatives and bulk donations",
+                method: "Strategic",
+              },
+            ].map((method, i) => (
+              <Card key={i} className="border-slate-200 hover:shadow-lg transition">
+                <CardContent className="p-8">
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">{method.title}</h3>
+                  <p className="text-slate-600 mb-4">{method.description}</p>
+                  <div className="inline-block px-3 py-1 bg-primary/10 rounded-full">
+                    <span className="text-sm font-semibold text-primary">{method.method}</span>
                   </div>
                 </CardContent>
               </Card>
@@ -365,59 +312,17 @@ export default function DonatePage() {
         </div>
       </section>
 
-      {/* Other Ways to Help */}
-      <section className="py-16 bg-primary text-white">
-        <div className="container mx-auto max-w-6xl px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Other Ways to Support SCDAN</h2>
-            <p className="text-xl text-primary-foreground/80 max-w-3xl mx-auto">
-              There are many ways to contribute to our mission beyond monetary donations
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-primary/90 border-0 text-white">
-              <CardHeader className="text-center">
-                <Users className="h-12 w-12 mx-auto mb-4 text-primary-foreground/70" />
-                <CardTitle className="text-xl">Volunteer</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="text-primary-foreground/80 mb-4">
-                  Join our volunteer team and directly help with community outreach programs
-                </CardDescription>
-                <Button variant="outline" className="border-white text-white hover:bg-primary/80 bg-transparent">
-                  Learn More
-                </Button>
-              </CardContent>
-            </Card>
-            <Card className="bg-primary/90 border-0 text-white">
-              <CardHeader className="text-center">
-                <Stethoscope className="h-12 w-12 mx-auto mb-4 text-primary-foreground/70" />
-                <CardTitle className="text-xl">Professional Services</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="text-primary-foreground/80 mb-4">
-                  Donate your professional dental services to our community programs
-                </CardDescription>
-                <Button variant="outline" className="border-white text-white hover:bg-primary/80 bg-transparent">
-                  Get Involved
-                </Button>
-              </CardContent>
-            </Card>
-            <Card className="bg-primary/90 border-0 text-white">
-              <CardHeader className="text-center">
-                <Award className="h-12 w-12 mx-auto mb-4 text-primary-foreground/70" />
-                <CardTitle className="text-xl">Corporate Partnership</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="text-primary-foreground/80 mb-4">
-                  Partner with us as a corporate sponsor for events and programs
-                </CardDescription>
-                <Button variant="outline" className="border-white text-white hover:bg-primary/80 bg-transparent">
-                  Partner With Us
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
+      {/* Final CTA */}
+      <section className="py-24 bg-gradient-to-r from-primary to-primary/80 text-white">
+        <div className="container mx-auto max-w-4xl px-4 text-center">
+          <h2 className="text-5xl font-bold mb-6">Ready to Make a Difference?</h2>
+          <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+            Your donation today provides dental care to someone who needs it most. Join thousands of supporters transforming lives.
+          </p>
+          <Button size="lg" className="bg-white text-primary hover:bg-slate-100 font-semibold">
+            Donate Now
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
         </div>
       </section>
 

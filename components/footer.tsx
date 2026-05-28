@@ -72,15 +72,15 @@ export default function Footer() {
             <h3 className="font-semibold text-lg mb-4">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-center space-x-3">
-                <Mail className="h-4 w-4 text-[#ffffff]" />
+                <Mail className="h-4 w-4" />
                 <span className="text-gray-400 text-sm">info@scdan.org</span>
               </li>
               <li className="flex items-center space-x-3">
-                <Phone className="h-4 w-4 text-[#ffffff]" />
+                <Phone className="h-4 w-4" />
                 <span className="text-gray-400 text-sm">+234 (0) 806 796 2409</span>
               </li>
               <li className="flex items-start space-x-3">
-                <MapPin className="h-4 w-4 text-[#ffffff] mt-1" />
+                <MapPin className="h-4 w-4 mt-1" />
                 <span className="text-gray-400 text-sm">
                   Lagos University Teaching Hospital
                 </span>

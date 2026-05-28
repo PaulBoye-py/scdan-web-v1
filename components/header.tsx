@@ -16,6 +16,9 @@ export default function Header() {
     { name: "About", href: "/about" },
     { name: "News", href: "/news" },
     { name: "Events", href: "/events" },
+    { name: "Gallery", href: "/gallery" },
+    { name: "Publications", href: "/publications" },
+    { name: "Resources", href: "/resources" },
     { name: "Donate", href: "/donate" },
   ]
 

@@ -22,7 +22,7 @@ export default function EventsPage() {
       capacity: 500,
       registered: 387,
       price: "₦25,000",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/scdan-hero.webp",
       featured: true,
     },
     {
@@ -36,7 +36,7 @@ export default function EventsPage() {
       capacity: 200,
       registered: 89,
       price: "Free",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/scdan-hero.webp",
     },
     {
       id: 3,
@@ -49,7 +49,7 @@ export default function EventsPage() {
       capacity: 50,
       registered: 32,
       price: "₦15,000",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/scdan-hero.webp",
     },
     {
       id: 4,
@@ -62,7 +62,7 @@ export default function EventsPage() {
       capacity: 100,
       registered: 67,
       price: "₦12,000",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/scdan-hero.webp",
     },
   ]
 
@@ -76,7 +76,7 @@ export default function EventsPage() {
       location: "Transcorp Hilton, Abuja",
       type: "Conference",
       attendees: 423,
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/scdan-hero.webp",
       highlights: ["15 international speakers", "30 research presentations", "5 hands-on workshops"],
     },
     {
@@ -87,7 +87,7 @@ export default function EventsPage() {
       location: "Lagos State Secretariat",
       type: "Launch Event",
       attendees: 150,
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/scdan-hero.webp",
       highlights: ["Government officials present", "Media coverage", "Community demonstrations"],
     },
     {
@@ -98,7 +98,7 @@ export default function EventsPage() {
       location: "University of Lagos",
       type: "Symposium",
       attendees: 200,
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/scdan-hero.webp",
       highlights: ["20 research papers", "Poster presentations", "Young researcher awards"],
     },
   ]
