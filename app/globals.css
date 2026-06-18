@@ -1,5 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+button, a[role="button"], [type="button"], [type="submit"] {
+  cursor: pointer;
+}
 
 @custom-variant dark (&:is(.dark *));
 

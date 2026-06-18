@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -34,10 +36,10 @@ export default function DonatePage() {
         <div className="container mx-auto max-w-6xl px-4">
           <div className="grid grid-cols-3 md:grid-cols-5 gap-6">
             {[
-              { number: "2,500+", label: "Patients Treated" },
-              { number: "500+", label: "Members" },
-              { number: "₦50M+", label: "Donated" },
-              { number: "15+", label: "Years Active" },
+              { number: "500+", label: "Patients Treated" },
+              { number: "10+", label: "Members" },
+              { number: "₦500K+", label: "Donated" },
+              { number: "5+", label: "Years Active" },
               { number: "100%", label: "Impact Focused" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
@@ -50,7 +52,7 @@ export default function DonatePage() {
       </section>
 
       {/* Donation Tiers */}
-      <section className="py-20 bg-white">
+      {/* <section className="py-20 bg-white">
         <div className="container mx-auto max-w-6xl px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-slate-900 mb-4">Choose Your Impact Level</h2>
@@ -124,7 +126,7 @@ export default function DonatePage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* How Donations Are Used */}
       <section className="py-20 bg-slate-50">
@@ -141,9 +143,9 @@ export default function DonatePage() {
               },
               {
                 icon: Award,
-                title: "Education & Training",
+                title: "Research & Training",
                 percentage: "25%",
-                description: "Professional development and continuing education for dentists"
+                description: "Research funding and professional development for dental practitioners"
               },
               {
                 icon: TrendingUp,
@@ -319,10 +321,10 @@ export default function DonatePage() {
           <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
             Your donation today provides dental care to someone who needs it most. Join thousands of supporters transforming lives.
           </p>
-          <Button size="lg" className="bg-white text-primary hover:bg-slate-100 font-semibold">
+          {/* <Button size="lg" className="bg-white text-primary hover:bg-slate-100 font-semibold">
             Donate Now
             <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+          </Button> */}
         </div>
       </section>
 

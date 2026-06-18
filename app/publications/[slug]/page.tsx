@@ -11,11 +11,12 @@ import { urlFor } from "@/lib/sanity"
 export const revalidate = 60
 export const dynamic = 'force-dynamic'
 
-export default async function PublicationPage({ params }: { params: { slug: string } }) {
+export default async function PublicationPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   let publication = null
 
   try {
-    publication = await getPublicationBySlug(params.slug)
+    publication = await getPublicationBySlug(slug)
   } catch (error) {
     console.log('Error fetching publication')
   }

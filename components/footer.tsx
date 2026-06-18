@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Facebook, Twitter, Linkedin, Mail, Phone, MapPin } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import NewsletterForm from "@/components/newsletter-form"
+import { Button } from "@/components/ui/button"
 
 export default function Footer() {
   return (
@@ -76,6 +76,10 @@ export default function Footer() {
                 <span className="text-gray-400 text-sm">info@scdan.org</span>
               </li>
               <li className="flex items-center space-x-3">
+                <Mail className="h-4 w-4" />
+                <span className="text-gray-400 text-sm">scdan.ng@gmail.com</span>
+              </li>
+              <li className="flex items-center space-x-3">
                 <Phone className="h-4 w-4" />
                 <span className="text-gray-400 text-sm">+234 (0) 806 796 2409</span>
               </li>
@@ -92,14 +96,7 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold text-lg mb-4">Newsletter</h3>
             <p className="text-gray-400 text-sm mb-4">Stay updated with our latest news and events.</p>
-            <div className="space-y-2">
-              <Input
-                type="email"
-                placeholder="Enter your email"
-                className="bg-gray-800 border-gray-700 text-white placeholder-gray-400"
-              />
-              <Button className="w-full bg-primary hover:bg-primary/90">Subscribe</Button>
-            </div>
+            <NewsletterForm />
           </div>
         </div>
 

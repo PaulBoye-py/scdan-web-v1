@@ -1,12 +1,24 @@
+export const dynamic = 'force-dynamic'
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { ArrowRight, Users, Target, Zap, Heart, Calendar, Newspaper, ChevronRight } from "lucide-react"
+import { ArrowRight, Users, Target, Heart, Newspaper, ChevronRight, MapPin, CalendarDays } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import { getRecentNews, getUpcomingEvents } from "@/lib/sanity-queries"
+import { urlFor } from "@/lib/sanity"
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [news, events] = await Promise.all([
+    getRecentNews(4),
+    getUpcomingEvents(2),
+  ])
+
+  const featuredNews = news.find((n: any) => n.featured) ?? news[0] ?? null
+  const sideNews = news.filter((n: any) => n !== featuredNews).slice(0, 3)
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -36,26 +48,25 @@ export default function HomePage() {
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-semibold">
-                  Explore Our Services
+                 <a href="/about" className="flex items-center">
+                  <div>Learn More</div>
                   <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button size="lg" variant="outline" className="border-slate-600 text-white hover:bg-slate-700">
-                  Contact Us
+                </a>
                 </Button>
               </div>
 
               {/* Stats */}
               <div className="grid grid-cols-3 gap-6 pt-8 border-t border-slate-700">
                 <div>
-                  <div className="text-3xl font-bold text-primary">500+</div>
+                  <div className="text-3xl font-bold text-primary">10+</div>
                   <p className="text-sm text-slate-400">Active Members</p>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-primary">10K+</div>
+                  <div className="text-3xl font-bold text-primary">500+</div>
                   <p className="text-sm text-slate-400">Patients Served</p>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-primary">15+</div>
+                  <div className="text-3xl font-bold text-primary">5+</div>
                   <p className="text-sm text-slate-400">Years Active</p>
                 </div>
               </div>
@@ -124,52 +135,68 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Featured News Card */}
-          <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl overflow-hidden mb-8 shadow-xl">
-            <div className="grid lg:grid-cols-2 gap-8 p-8 md:p-12">
-              <div className="flex flex-col justify-center text-white">
-                <div className="inline-flex w-fit gap-2 mb-4">
-                  <span className="px-3 py-1 bg-primary/20 border border-primary/50 rounded-full text-sm font-semibold text-primary">Featured</span>
-                </div>
-                <h3 className="text-3xl font-bold mb-4">SCDAN Annual Conference 2024</h3>
-                <p className="text-slate-300 mb-6 text-lg">Join us for our biggest event of the year featuring international speakers and cutting-edge research presentations in special care dentistry.</p>
-                <div className="flex gap-4">
-                  <Button className="bg-primary hover:bg-primary/90 text-white">Learn More</Button>
-                </div>
-              </div>
-              <div className="relative rounded-xl overflow-hidden h-64 md:h-auto">
-                <Image
-                  src="/scdan-news.webp"
-                  alt="Conference"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* News Grid */}
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { title: "New Guidelines Released", date: "Mar 10", icon: Newspaper },
-              { title: "Outreach Program Expands", date: "Mar 5", icon: Users },
-              { title: "Research Findings Published", date: "Feb 28", icon: Zap },
-            ].map((item, i) => (
-              <Card key={i} className="group hover:shadow-lg transition-all cursor-pointer border-slate-200">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-6 h-6 text-primary" />
+          {news.length === 0 ? (
+            <p className="text-slate-500 text-center py-12">No news articles available yet.</p>
+          ) : (
+            <>
+              {/* Featured News Card */}
+              {featuredNews && (
+                <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl overflow-hidden mb-8 shadow-xl">
+                  <div className="grid lg:grid-cols-2 gap-8 p-8 md:p-12">
+                    <div className="flex flex-col justify-center text-white">
+                      <div className="inline-flex w-fit gap-2 mb-4">
+                        <span className="px-3 py-1 bg-primary/20 border border-primary/50 rounded-full text-sm font-semibold text-primary">
+                          {featuredNews.category ?? 'Featured'}
+                        </span>
+                      </div>
+                      <h3 className="text-3xl font-bold mb-4">{featuredNews.title}</h3>
+                      {featuredNews.excerpt && (
+                        <p className="text-slate-300 mb-6 text-lg">{featuredNews.excerpt}</p>
+                      )}
+                      <div className="flex gap-4">
+                        <Link href={`/news/${featuredNews.slug?.current}`}>
+                          <Button className="bg-primary hover:bg-primary/90 text-white">Learn More</Button>
+                        </Link>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <p className="text-sm text-slate-500 mb-2">{item.date}</p>
-                      <h4 className="font-bold text-slate-900 group-hover:text-primary transition">{item.title}</h4>
+                    <div className="relative rounded-xl overflow-hidden h-64 md:h-auto">
+                      <Image
+                        src={featuredNews.featuredImage ? urlFor(featuredNews.featuredImage).width(600).height(400).fit('crop').url() : '/scdan-news.webp'}
+                        alt={featuredNews.title}
+                        fill
+                        className="object-cover"
+                      />
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                </div>
+              )}
+
+              {/* News Grid */}
+              {sideNews.length > 0 && (
+                <div className="grid md:grid-cols-3 gap-6">
+                  {sideNews.map((item: any) => (
+                    <Link key={item._id} href={`/news/${item.slug?.current}`}>
+                      <Card className="group hover:shadow-lg transition-all cursor-pointer border-slate-200">
+                        <CardContent className="p-6">
+                          <div className="flex items-start gap-4">
+                            <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                              <Newspaper className="w-6 h-6 text-primary" />
+                            </div>
+                            <div className="flex-1">
+                              <p className="text-sm text-slate-500 mb-2">
+                                {item.publishedAt ? new Date(item.publishedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : ''}
+                              </p>
+                              <h4 className="font-bold text-slate-900 group-hover:text-primary transition line-clamp-2">{item.title}</h4>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
         </div>
       </section>
 
@@ -189,28 +216,38 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              { title: "Annual Conference 2024", date: "March 20-22", location: "Lagos", attendees: "500+" },
-              { title: "Community Health Fair", date: "April 15", location: "Abuja", attendees: "1000+" },
-            ].map((event, i) => (
-              <div key={i} className="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all border border-slate-200">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-2">{event.title}</h3>
-                    <div className="flex flex-wrap gap-4 text-sm text-slate-600">
-                      <span className="flex items-center gap-1">📅 {event.date}</span>
-                      <span className="flex items-center gap-1">📍 {event.location}</span>
-                      <span className="flex items-center gap-1">👥 {event.attendees}</span>
-                    </div>
+          {events.length === 0 ? (
+            <p className="text-slate-500 text-center py-12">No upcoming events at this time.</p>
+          ) : (
+            <div className="grid md:grid-cols-2 gap-6">
+              {events.map((event: any) => (
+                <div key={event._id} className="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all border border-slate-200">
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">{event.title}</h3>
+                  <div className="flex flex-wrap gap-4 text-sm text-slate-600 mb-6">
+                    <span className="flex items-center gap-1.5">
+                      <CalendarDays className="w-4 h-4 text-primary" />
+                      {new Date(event.startDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                    </span>
+                    {event.location && (
+                      <span className="flex items-center gap-1.5">
+                        <MapPin className="w-4 h-4 text-primary" />
+                        {event.location}
+                      </span>
+                    )}
                   </div>
+                  {event.registrationLink ? (
+                    <a href={event.registrationLink} target="_blank" rel="noopener noreferrer">
+                      <Button className="w-full">Register Now</Button>
+                    </a>
+                  ) : (
+                    <Link href={`/events/${event.slug?.current}`}>
+                      <Button className="w-full" variant="outline">View Details</Button>
+                    </Link>
+                  )}
                 </div>
-                <Button className="w-full mt-4">
-                  Register Now
-                </Button>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -222,12 +259,16 @@ export default function HomePage() {
             Join SCDAN in our mission to transform dental care for special needs populations across Nigeria.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-primary hover:bg-slate-100 font-semibold">
-              Become a Member
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 font-semibold">
-              <Link href="/donate">Support Our Work</Link>
-            </Button>
+            <a href="https://forms.gle/Un9MsXCaccFyHAMW6" target="_blank" rel="noopener noreferrer">
+              <Button size="lg" className="bg-white text-primary hover:bg-slate-100 hover:scale-105 cursor-pointer font-semibold transition-all duration-200 w-full sm:w-auto">
+                Become a Member
+              </Button>
+            </a>
+            <Link href="/donate">
+              <Button size="lg" className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary hover:scale-105 cursor-pointer font-semibold transition-all duration-200 w-full sm:w-auto">
+                Support Our Work
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -237,10 +278,10 @@ export default function HomePage() {
         <div className="container mx-auto max-w-6xl px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { number: "500+", label: "Members" },
-              { number: "10K+", label: "Patients Served" },
-              { number: "50+", label: "Events Annually" },
-              { number: "15+", label: "Years Strong" },
+              { number: "10+", label: "Members" },
+              { number: "500+", label: "Patients Served" },
+              { number: "10+", label: "Events Annually" },
+              { number: "5+", label: "Years Strong" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
                 <div className="text-4xl font-bold text-primary mb-2">{stat.number}</div>

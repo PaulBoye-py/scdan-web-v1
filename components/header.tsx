@@ -47,7 +47,7 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            <Button className="bg-primary hover:bg-primary/90 text-white">Become a Member</Button>
+            <Button className="bg-primary hover:bg-primary/90 text-white"><a href="https://forms.gle/XGKQekvQTo1AwPZd7" target="_blank" rel="noopener noreferrer">Become a Member</a></Button>
           </nav>
 
           {/* Mobile Menu Button */}

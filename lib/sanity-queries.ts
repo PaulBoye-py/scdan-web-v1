@@ -124,9 +124,12 @@ export async function getPastEvents(limit: number = 10) {
       slug,
       description,
       startDate,
+      endDate,
+      time,
       location,
       eventType,
       image,
+      registrationLink,
     }
   `)
 }
@@ -154,6 +157,20 @@ export async function getEventBySlug(slug: string) {
 }
 
 // Team Member Queries
+export async function getAllTeamMembersSorted() {
+  return client.fetch(`
+    *[_type == "teamMember"] | order(defined(position) desc, order asc, name asc) {
+      _id,
+      name,
+      position,
+      role,
+      image,
+      specialty,
+      bio,
+    }
+  `)
+}
+
 export async function getTeamMembers(role?: string, limit?: number) {
   let query = '*[_type == "teamMember"'
 
@@ -213,8 +230,9 @@ export async function getGalleries(limit?: number) {
       slug,
       description,
       date,
-      images,
       featured,
+      "imageCount": count(images),
+      "coverImage": images[0].image,
     }
   `)
 }
@@ -254,6 +272,8 @@ export async function getResources(category?: string) {
       description,
       category,
       publishedAt,
+      externalLink,
+      "fileUrl": file.asset->url,
       author->{
         name,
       },
@@ -344,7 +364,7 @@ export async function getPublications(limit?: number) {
       publishedAt,
       category,
       image,
-      file,
+      "fileUrl": file.asset->url,
       externalUrl,
       featured,
       author->{
@@ -366,10 +386,11 @@ export async function getFeaturedPublications() {
       publishedAt,
       category,
       image,
-      file,
+      "fileUrl": file.asset->url,
       externalUrl,
       author->{
         name,
+        image,
       },
     }
   `)

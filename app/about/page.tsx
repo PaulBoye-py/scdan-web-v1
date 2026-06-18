@@ -1,12 +1,18 @@
+export const dynamic = 'force-dynamic'
+
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import { Users, Target, Eye, Heart, Award, Globe, ArrowRight, ChevronRight, Zap } from "lucide-react"
-import Image from "next/image"
 import Link from "next/link"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import { getAllTeamMembersSorted } from "@/lib/sanity-queries"
+import { urlFor } from "@/lib/sanity"
+import MemberCard from "@/components/member-card"
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const allMembers = await getAllTeamMembersSorted()
+  const leaders = allMembers.filter((m: any) => m.position)
+  const members = allMembers.filter((m: any) => !m.position)
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -117,29 +123,23 @@ export default function AboutPage() {
             <p className="text-lg text-slate-600">Meet the dedicated professionals leading SCDAN</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { name: "Prof. Folakemi Oredugba", position: "President", image: "/scdan-about.webp" },
-              { name: "Dr. Ronke Oluwo", position: "Vice President", image: "/scdan-about.webp" },
-              { name: "Dr. Tunde Akinyele", position: "Secretary General", image: "/scdan-about.webp" },
-              { name: "Dr. Dipo Ayedun", position: "Treasurer", image: "/scdan-about.webp" },
-            ].map((leader, i) => (
-              <div key={i} className="text-center group">
-                <div className="relative mb-6 overflow-hidden rounded-2xl">
-                  <Image
-                    src={leader.image}
-                    alt={leader.name}
-                    width={250}
-                    height={250}
-                    className="w-full aspect-square object-cover group-hover:scale-105 transition duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition"></div>
-                </div>
-                <h3 className="font-bold text-lg text-slate-900 mb-1">{leader.name}</h3>
-                <p className="text-primary font-semibold">{leader.position}</p>
-              </div>
-            ))}
-          </div>
+          {leaders.length > 0 ? (
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {leaders.map((leader: any) => (
+                <MemberCard
+                  key={leader._id}
+                  member={{
+                    ...leader,
+                    imageUrl: leader.image
+                      ? urlFor(leader.image).width(400).height(400).fit('crop').url()
+                      : '/scdan-about.webp',
+                  }}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="text-slate-500 text-center py-12">No leadership data available.</p>
+          )}
         </div>
       </section>
 
@@ -151,38 +151,28 @@ export default function AboutPage() {
               <h2 className="text-4xl font-bold text-slate-900 mb-3">Our Members</h2>
               <p className="text-lg text-slate-600">Dental professionals committed to special care dentistry</p>
             </div>
-            <span className="text-3xl font-bold text-primary">500+</span>
+            {allMembers.length > 0 && (
+              <span className="text-3xl font-bold text-primary">{allMembers.length}</span>
+            )}
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { name: "Dr. Emeka Nwankwo", specialty: "Pediatric Special Care", location: "Lagos" },
-              { name: "Dr. Kemi Oladele", specialty: "Geriatric Dentistry", location: "Abuja" },
-              { name: "Dr. Ibrahim Suleiman", specialty: "Disability Dental Care", location: "Kano" },
-              { name: "Dr. Grace Okafor", specialty: "Behavioral Management", location: "Port Harcourt" },
-              { name: "Dr. Yusuf Abdullahi", specialty: "Sedation Dentistry", location: "Kaduna" },
-              { name: "Dr. Folake Adebisi", specialty: "Oral Medicine", location: "Ibadan" },
-            ].map((member, i) => (
-              <Card key={i} className="hover:shadow-lg transition-all border-slate-200">
-                <CardContent className="p-6">
-                  <div className="flex gap-4">
-                    <Image
-                      src="/scdan-logo.jpg"
-                      alt={member.name}
-                      width={60}
-                      height={60}
-                      className="rounded-full"
-                    />
-                    <div className="flex-1">
-                      <h4 className="font-bold text-slate-900">{member.name}</h4>
-                      <p className="text-sm text-primary font-semibold">{member.specialty}</p>
-                      <p className="text-xs text-slate-500 mt-1">{member.location}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          {members.length > 0 ? (
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {members.map((member: any) => (
+                <MemberCard
+                  key={member._id}
+                  member={{
+                    ...member,
+                    imageUrl: member.image
+                      ? urlFor(member.image).width(400).height(400).fit('crop').url()
+                      : '/scdan-logo.jpg',
+                  }}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="text-slate-500 text-center py-12">No members found.</p>
+          )}
         </div>
       </section>
 
