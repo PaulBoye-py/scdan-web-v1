@@ -66,7 +66,7 @@ export default async function HomePage() {
                   <p className="text-sm text-slate-400">Patients Served</p>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-primary">5+</div>
+                  <div className="text-3xl font-bold text-primary">15+</div>
                   <p className="text-sm text-slate-400">Years Active</p>
                 </div>
               </div>
@@ -281,7 +281,7 @@ export default async function HomePage() {
               { number: "10+", label: "Members" },
               { number: "500+", label: "Patients Served" },
               { number: "10+", label: "Events Annually" },
-              { number: "5+", label: "Years Strong" },
+              { number: "15+", label: "Years Strong" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
                 <div className="text-4xl font-bold text-primary mb-2">{stat.number}</div>

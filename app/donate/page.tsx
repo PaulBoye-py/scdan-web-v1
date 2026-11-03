@@ -39,7 +39,7 @@ export default function DonatePage() {
               { number: "500+", label: "Patients Treated" },
               { number: "10+", label: "Members" },
               { number: "₦500K+", label: "Donated" },
-              { number: "5+", label: "Years Active" },
+              { number: "15+", label: "Years Active" },
               { number: "100%", label: "Impact Focused" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
@@ -62,27 +62,27 @@ export default function DonatePage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                amount: "₦5,000",
+                amount: "₦20,000",
                 title: "Supporter",
                 impact: "Provides dental supplies for 1 patient",
                 features: ["Emergency dental care", "Supply kit", "Impact report"]
               },
               {
-                amount: "₦15,000",
+                amount: "₦60,000",
                 title: "Advocate",
                 impact: "Treats 3 special needs patients",
                 features: ["Full dental treatment", "Follow-up care", "Monthly updates"]
               },
               {
-                amount: "₦25,000",
+                amount: "₦100,000",
                 title: "Champion",
                 impact: "Sponsors professional training",
                 features: ["Practitioner training", "Certification program", "Quarterly report"]
               },
               {
-                amount: "₦50,000",
+                amount: "Custom",
                 title: "Guardian",
-                impact: "Funds complete outreach program",
+                impact: "Fund a complete outreach program. Contact us to agree an amount.",
                 features: ["Community program", "Team support", "Annual recognition"]
               },
             ].map((tier, i) => (
