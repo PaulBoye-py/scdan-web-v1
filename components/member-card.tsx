@@ -36,9 +36,14 @@ export default function MemberCard({ member }: { member: Member }) {
           alt=""
           fill
           sizes="(min-width: 1024px) 270px, (min-width: 640px) 33vw, 50vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          className="object-cover grayscale transition-[filter,transform] duration-500 group-hover:scale-[1.03] group-hover:grayscale-0 group-focus-visible:grayscale-0"
         />
       )}
+      {/* Brand-blue tint that fades in with the colour */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-t from-brand/45 via-brand/20 to-sky/10 opacity-0 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100"
+      />
     </div>
   )
 

@@ -224,7 +224,7 @@ export default async function HomePage() {
             />
             <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
               {officers.map((person: any) => (
-                <li key={person._id} className="flex items-center gap-4">
+                <li key={person._id} className="group flex items-center gap-4">
                   <div className="relative size-20 shrink-0 overflow-hidden rounded-full bg-mist">
                     {person.image && (
                       <Image
@@ -232,9 +232,13 @@ export default async function HomePage() {
                         alt=""
                         fill
                         sizes="80px"
-                        className="object-cover"
+                        className="object-cover grayscale transition-[filter] duration-500 group-hover:grayscale-0"
                       />
                     )}
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 bg-gradient-to-t from-brand/45 via-brand/20 to-sky/10 opacity-0 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-100"
+                    />
                   </div>
                   <div className="min-w-0">
                     <p className="eyebrow text-brand">{person.position}</p>
