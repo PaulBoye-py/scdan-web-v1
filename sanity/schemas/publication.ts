@@ -111,6 +111,11 @@ export default defineType({
       type: 'array',
       of: [{ type: 'string' }],
     }),
+    defineField({
+      name: 'seo',
+      title: 'SEO & sharing',
+      type: 'seo',
+    }),
   ],
   preview: {
     select: {

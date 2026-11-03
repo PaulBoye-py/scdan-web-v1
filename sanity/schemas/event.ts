@@ -123,6 +123,11 @@ export default defineType({
       type: 'url',
       description: 'External link for event registration',
     }),
+    defineField({
+      name: 'seo',
+      title: 'SEO & sharing',
+      type: 'seo',
+    }),
   ],
   preview: {
     select: {

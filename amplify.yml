@@ -13,6 +13,7 @@ applications:
             - echo "NEXT_PUBLIC_SANITY_PROJECT_ID=$NEXT_PUBLIC_SANITY_PROJECT_ID" >> .env.production
             - echo "NEXT_PUBLIC_SANITY_DATASET=$NEXT_PUBLIC_SANITY_DATASET" >> .env.production
             - echo "NEXT_PUBLIC_SANITY_API_VERSION=$NEXT_PUBLIC_SANITY_API_VERSION" >> .env.production
+            - echo "SANITY_REVALIDATE_SECRET=$SANITY_REVALIDATE_SECRET" >> .env.production
             - rm -rf .next
             - NODE_OPTIONS=--max-old-space-size=4096 npm run build
       artifacts:

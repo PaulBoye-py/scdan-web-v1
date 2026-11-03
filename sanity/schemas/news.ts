@@ -120,6 +120,11 @@ export default defineType({
         layout: 'tags',
       },
     }),
+    defineField({
+      name: 'seo',
+      title: 'SEO & sharing',
+      type: 'seo',
+    }),
   ],
   preview: {
     select: {

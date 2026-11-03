@@ -1,113 +1,112 @@
 'use client'
 
-import { useState } from 'react'
-import Image from 'next/image'
-import { X } from 'lucide-react'
 import { PortableText } from '@portabletext/react'
+import { X } from 'lucide-react'
+import Image from 'next/image'
+import { useEffect, useId, useRef, useState } from 'react'
 
 interface Member {
   _id: string
   name: string
+  displayName: string
   position?: string
   specialty?: string
-  image?: any
   bio?: any[]
-  imageUrl: string
+  imageUrl?: string
 }
 
 export default function MemberCard({ member }: { member: Member }) {
   const [open, setOpen] = useState(false)
+  const dialogRef = useRef<HTMLDialogElement>(null)
+  const titleId = useId()
+  const hasDetails = Boolean(member.bio?.length || member.specialty)
+
+  useEffect(() => {
+    const dialog = dialogRef.current
+    if (!dialog) return
+    if (open && !dialog.open) dialog.showModal()
+    if (!open && dialog.open) dialog.close()
+  }, [open])
+
+  const photo = (
+    <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-mist">
+      {member.imageUrl && (
+        <Image
+          src={member.imageUrl}
+          alt=""
+          fill
+          sizes="(min-width: 1024px) 270px, (min-width: 640px) 33vw, 50vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        />
+      )}
+    </div>
+  )
 
   return (
     <>
       <button
+        type="button"
         onClick={() => setOpen(true)}
-        className="group w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
+        disabled={!hasDetails}
+        className="group flex w-full flex-col gap-3 text-left disabled:cursor-default"
+        aria-haspopup={hasDetails ? 'dialog' : undefined}
       >
-        <div className="bg-white border border-slate-200 rounded-xl overflow-hidden transition-all duration-300 hover:border-primary/40 hover:shadow-lg flex flex-col">
-          <div className="relative aspect-square overflow-hidden">
-            <Image
-              src={member.imageUrl}
-              alt={member.name}
-              fill
-              className="object-cover grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-all duration-300" />
-          </div>
-          <div className="p-4 border-t border-slate-100 h-28 overflow-hidden">
-            <h4 className="font-semibold text-slate-900 text-sm leading-snug line-clamp-2">{member.name}</h4>
-            {member.position ? (
-              <p className="text-xs text-primary font-medium mt-1">{member.position}</p>
-            ) : (
-              <span className="inline-block mt-1.5 text-xs font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">Member</span>
-            )}
-          </div>
-        </div>
+        {photo}
+        <span>
+          {member.position && <span className="eyebrow block text-brand">{member.position}</span>}
+          <span className="mt-1 block font-serif text-lg font-semibold leading-snug text-ink group-enabled:group-hover:text-brand">
+            {member.displayName}
+          </span>
+          {hasDetails && <span className="mt-1 block text-sm text-muted">Read profile</span>}
+        </span>
       </button>
 
-      {open && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
-          onClick={() => setOpen(false)}
-        >
-          <div
-            className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
+      <dialog
+        ref={dialogRef}
+        aria-labelledby={titleId}
+        onClose={() => setOpen(false)}
+        onClick={(e) => e.target === e.currentTarget && setOpen(false)}
+        className="m-auto w-[min(36rem,calc(100vw-2rem))] max-h-[85vh] rounded-lg bg-paper p-0 text-ink shadow-2xl backdrop:bg-ink/60 backdrop:backdrop-blur-sm"
+      >
+        <div className="relative p-7 md:p-9">
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            className="absolute top-4 right-4 flex size-9 items-center justify-center rounded-full text-muted hover:bg-mist hover:text-ink"
+            aria-label="Close profile"
           >
-            <button
-              onClick={() => setOpen(false)}
-              className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition"
-            >
-              <X className="w-4 h-4 text-slate-600" />
-            </button>
-
-            {/* Header */}
-            <div className="flex flex-col items-center pt-10 pb-6 px-6 border-b border-slate-100">
-              <div className="relative w-32 h-32 rounded-full overflow-hidden ring-4 ring-primary/20 mb-4">
-                <Image
-                  src={member.imageUrl}
-                  alt={member.name}
-                  fill
-                  className="object-cover"
-                />
+            <X className="size-5" />
+          </button>
+          <div className="flex items-center gap-5 pr-8">
+            {member.imageUrl && (
+              <div className="relative size-20 shrink-0 overflow-hidden rounded-full bg-mist">
+                <Image src={member.imageUrl} alt="" fill sizes="80px" className="object-cover" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 text-center">{member.name}</h3>
-              {member.position && (
-                <p className="text-sm text-primary font-semibold mt-1">{member.position}</p>
-              )}
-            </div>
-
-            {/* Body */}
-            <div className="p-6 space-y-6">
-              {member.bio && member.bio.length > 0 && (
-                <div>
-                  <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3">Biography</h4>
-                  <div className="prose prose-sm prose-slate max-w-none">
-                    <PortableText value={member.bio} />
-                  </div>
-                </div>
-              )}
-
-              {member.specialty && (
-                <div>
-                  <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3">Area of Interest</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {member.specialty.split(',').map((s: string) => s.trim()).filter(Boolean).map((s: string) => (
-                      <span key={s} className="inline-block bg-primary/10 text-primary text-sm font-medium px-3 py-1 rounded-full">
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {!member.bio?.length && !member.specialty && (
-                <p className="text-slate-400 text-sm italic text-center">No additional information available.</p>
-              )}
+            )}
+            <div>
+              {member.position && <p className="eyebrow text-brand">{member.position}</p>}
+              <h3 id={titleId} className="mt-1 text-xl leading-snug">{member.name.trim()}</h3>
             </div>
           </div>
+
+          {member.specialty && (
+            <div className="mt-7">
+              <p className="eyebrow text-muted">Areas of interest</p>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {member.specialty.split(',').map((s) => s.trim()).filter(Boolean).map((s) => (
+                  <li key={s} className="rounded-full bg-mist px-3 py-1 text-sm font-semibold text-ink">{s}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {member.bio && member.bio.length > 0 && (
+            <div className="prose prose-slate mt-7 max-w-none text-[1.0625rem] leading-relaxed">
+              <PortableText value={member.bio} />
+            </div>
+          )}
         </div>
-      )}
+      </dialog>
     </>
   )
 }

@@ -66,6 +66,11 @@ export default defineType({
       title: 'Featured Gallery',
       type: 'boolean',
     }),
+    defineField({
+      name: 'seo',
+      title: 'SEO & sharing',
+      type: 'seo',
+    }),
   ],
   preview: {
     select: {
