@@ -19,7 +19,6 @@ export default function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur supports-[backdrop-filter]:bg-paper/85">
-      <div className="spectrum h-1" aria-hidden="true" />
       <div className="container-site flex h-[4.5rem] items-center justify-between gap-6">
         <Link href="/" className="flex min-w-0 items-center gap-3" aria-label={`${site.shortName} home`}>
           <Image src="/scdan-logo.jpg" alt="" width={44} height={44} className="size-11 shrink-0 rounded-full" priority />

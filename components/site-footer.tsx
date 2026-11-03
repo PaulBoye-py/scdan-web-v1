@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import NewsletterForm from "@/components/newsletter-form"
+import SpectrumMark from "@/components/spectrum-mark"
 import { site } from "@/lib/site"
 
 const columns = [
@@ -35,7 +36,6 @@ const columns = [
 export default function SiteFooter() {
   return (
     <footer className="bg-ink text-white">
-      <div className="spectrum h-1" aria-hidden="true" />
       <div className="container-site grid gap-12 py-16 lg:grid-cols-[1.3fr_2fr]">
         <div className="max-w-sm space-y-5">
           <Link href="/" className="flex items-center gap-3">
@@ -87,9 +87,9 @@ export default function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-white/10">
-        <div className="container-site flex flex-col gap-2 py-6 text-sm text-white/50 sm:flex-row sm:justify-between">
+        <div className="container-site flex flex-col gap-3 py-6 text-sm text-white/50 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} {site.name}</p>
-          <p>scdan.org</p>
+          <SpectrumMark variant="bars" />
         </div>
       </div>
     </footer>

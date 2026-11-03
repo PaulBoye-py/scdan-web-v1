@@ -1,5 +1,6 @@
 import Link from "next/link"
 import JsonLd from "@/components/json-ld"
+import SpectrumMark from "@/components/spectrum-mark"
 import { breadcrumbJsonLd } from "@/lib/seo"
 
 export interface Crumb {
@@ -50,7 +51,12 @@ export default function PageHeader({
       <div className="container-site py-12 md:py-16">
         <Breadcrumbs items={crumbs} />
         <div className="mt-8 max-w-3xl">
-          {eyebrow && <p className="eyebrow text-brand">{eyebrow}</p>}
+          {eyebrow && (
+            <p className="eyebrow flex items-center gap-2.5 text-brand">
+              <SpectrumMark />
+              {eyebrow}
+            </p>
+          )}
           <h1 className="mt-3 text-4xl leading-[1.1] text-ink md:text-5xl">{title}</h1>
           {lede && <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">{lede}</p>}
           {children}
@@ -76,7 +82,12 @@ export function SectionHeading({
   return (
     <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
       <div className="max-w-2xl">
-        {eyebrow && <p className="eyebrow text-brand">{eyebrow}</p>}
+        {eyebrow && (
+          <p className="eyebrow flex items-center gap-2.5 text-brand">
+            <SpectrumMark />
+            {eyebrow}
+          </p>
+        )}
         <h2 id={id} className="mt-2 text-3xl leading-tight text-ink md:text-4xl">{title}</h2>
         {lede && <p className="mt-3 text-lg text-muted">{lede}</p>}
       </div>

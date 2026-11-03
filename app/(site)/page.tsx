@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { EventCard, NewsCard } from "@/components/cards"
 import NewsletterForm from "@/components/newsletter-form"
+import SpectrumMark from "@/components/spectrum-mark"
 import { EmptyState, SectionHeading } from "@/components/page-header"
 import { Button } from "@/components/ui/button"
 import { imageAlt, urlFor } from "@/lib/sanity"
@@ -56,7 +57,10 @@ export default async function HomePage() {
       <section className="relative overflow-hidden border-b border-line bg-paper">
         <div className="container-site grid items-center gap-12 py-14 md:py-20 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
           <div>
-            <p className="eyebrow text-brand">{site.name}</p>
+            <p className="eyebrow flex items-center gap-2.5 text-brand">
+              <SpectrumMark />
+              {site.name}
+            </p>
             <h1 className="mt-4 text-[2.5rem] leading-[1.08] text-ink sm:text-5xl lg:text-[3.5rem]">
               Equitable oral healthcare for people with special healthcare needs
             </h1>
@@ -88,7 +92,6 @@ export default async function HomePage() {
                 className="object-cover"
               />
             </div>
-            <div className="spectrum absolute -bottom-3 left-6 right-6 h-1.5 rounded-full" aria-hidden="true" />
           </div>
         </div>
       </section>
@@ -255,7 +258,10 @@ export default async function HomePage() {
       <section className="bg-ink text-white">
         <div className="container-site grid gap-10 py-20 md:grid-cols-2 md:items-end">
           <div>
-            <p className="eyebrow text-sky">Get involved</p>
+            <p className="eyebrow flex items-center gap-2.5 text-sky">
+              <SpectrumMark />
+              Get involved
+            </p>
             <h2 className="mt-3 text-4xl leading-tight md:text-5xl">Join the clinicians changing access to dental care</h2>
           </div>
           <div className="flex flex-col gap-6 md:items-start">

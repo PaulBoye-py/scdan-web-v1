@@ -3,7 +3,7 @@
 @plugin "@tailwindcss/typography";
 
 /* SCDAN brand tokens. Navy anchors the page, SCDAN Blue carries actions, Ring Blue and the
-   tooth spectrum come from the logo and are used as accents only. */
+   tooth spectrum come from the logo; the spectrum appears only as the small SpectrumMark. */
 @theme {
   --color-ink: #0a2540;
   --color-ink-soft: #1d3a5c;
@@ -59,18 +59,6 @@
   @media (width >= 48rem) {
     padding-inline: 2rem;
   }
-}
-
-/* The five tooth colours from the logo, as a thin signature band */
-@utility spectrum {
-  background-image: linear-gradient(
-    to right,
-    var(--color-spectrum-blue) 0 20%,
-    var(--color-spectrum-red) 20% 40%,
-    var(--color-spectrum-amber) 40% 60%,
-    var(--color-spectrum-green) 60% 80%,
-    var(--color-spectrum-teal) 80% 100%
-  );
 }
 
 @utility eyebrow {

@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import CopyButton from "@/components/copy-button"
+import SpectrumMark from "@/components/spectrum-mark"
 import PageHeader, { SectionHeading } from "@/components/page-header"
 import { Button } from "@/components/ui/button"
 import { pageMetadata } from "@/lib/seo"
@@ -101,7 +102,10 @@ export default function DonatePage() {
       <section id="bank-transfer" className="border-t border-line bg-mist py-20 md:py-24">
         <div className="container-site grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-start">
           <div>
-            <p className="eyebrow text-brand">Bank transfer</p>
+            <p className="eyebrow flex items-center gap-2.5 text-brand">
+              <SpectrumMark />
+              Bank transfer
+            </p>
             <h2 className="mt-2 text-3xl text-ink md:text-4xl">Give directly to our account</h2>
             <p className="mt-4 text-lg text-muted">
               Transfer any amount to the account below. Please use your name as the transfer reference so we can thank you and

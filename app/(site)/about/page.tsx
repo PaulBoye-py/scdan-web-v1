@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import MemberCard from "@/components/member-card"
+import SpectrumMark from "@/components/spectrum-mark"
 import PageHeader, { SectionHeading } from "@/components/page-header"
 import { Button } from "@/components/ui/button"
 import { urlFor } from "@/lib/sanity"
@@ -72,7 +73,10 @@ export default async function AboutPage() {
       <section className="py-20 md:py-24">
         <div className="container-site grid gap-14 lg:grid-cols-[1fr_1.15fr]">
           <div>
-            <p className="eyebrow text-brand">Our vision</p>
+            <p className="eyebrow flex items-center gap-2.5 text-brand">
+              <SpectrumMark />
+              Our vision
+            </p>
             <p className="mt-4 font-serif text-[1.75rem] leading-snug text-ink md:text-3xl">
               To improve the oral health and quality of life of people with physical, sensory, intellectual or medical impairments,
               and to advocate for equitable oral healthcare outcomes for people with special healthcare needs.
@@ -88,7 +92,10 @@ export default async function AboutPage() {
             </div>
           </div>
           <div>
-            <p className="eyebrow text-brand">Our mission</p>
+            <p className="eyebrow flex items-center gap-2.5 text-brand">
+              <SpectrumMark />
+              Our mission
+            </p>
             <h2 className="mt-3 text-3xl text-ink">What we set out to do</h2>
             <ol className="mt-8 divide-y divide-line border-y border-line">
               {mission.map((item, i) => (

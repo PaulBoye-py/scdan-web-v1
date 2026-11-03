@@ -35,6 +35,17 @@ function loadAssets() {
   return assets
 }
 
+// Same five-dot signature as components/spectrum-mark.tsx, drawn with Satori-safe styles
+function SpectrumMark() {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+      {colors.spectrum.map((c) => (
+        <div key={c} style={{ width: 12, height: 12, borderRadius: 999, background: c }} />
+      ))}
+    </div>
+  )
+}
+
 export interface OgInput {
   /** Small label above the title, e.g. "News · Community" */
   eyebrow?: string
@@ -72,7 +83,7 @@ export async function renderOgImage({ eyebrow, title, meta, image, override }: O
   return new ImageResponse(
     (
       <div style={{ display: "flex", width: "100%", height: "100%", background: colors.ink, fontFamily: "Source Sans 3" }}>
-        <div style={{ display: "flex", flexDirection: "column", flex: 1, padding: "64px 72px 76px", color: "white" }}>
+        <div style={{ display: "flex", flexDirection: "column", flex: 1, padding: "64px 72px", color: "white" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={logo} width={64} height={64} alt="" style={{ borderRadius: 999 }} />
@@ -84,9 +95,12 @@ export async function renderOgImage({ eyebrow, title, meta, image, override }: O
 
           <div style={{ display: "flex", flexDirection: "column", flex: 1, justifyContent: "center", gap: 20 }}>
             {eyebrow && (
-              <span style={{ fontSize: 21, fontWeight: 600, letterSpacing: 2.5, textTransform: "uppercase", color: colors.sky }}>
-                {eyebrow}
-              </span>
+              <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                <SpectrumMark />
+                <span style={{ fontSize: 21, fontWeight: 600, letterSpacing: 2.5, textTransform: "uppercase", color: colors.sky }}>
+                  {eyebrow}
+                </span>
+              </div>
             )}
             <span
               style={{
@@ -103,7 +117,9 @@ export async function renderOgImage({ eyebrow, title, meta, image, override }: O
           </div>
 
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 24, fontSize: 22 }}>
-            <span style={{ color: "rgba(255,255,255,0.72)", lineClamp: 1 }}>{meta ?? ""}</span>
+            <span style={{ flex: 1, minWidth: 0, color: "rgba(255,255,255,0.72)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+              {meta ?? ""}
+            </span>
             <span style={{ fontWeight: 600, flexShrink: 0 }}>scdan.org</span>
           </div>
         </div>
@@ -112,12 +128,6 @@ export async function renderOgImage({ eyebrow, title, meta, image, override }: O
           // eslint-disable-next-line @next/next/no-img-element
           <img src={imageSrc} width={460} height={630} alt="" style={{ objectFit: "cover" }} />
         )}
-
-        <div style={{ display: "flex", position: "absolute", left: 0, right: 0, bottom: 0, height: 12 }}>
-          {colors.spectrum.map((c) => (
-            <div key={c} style={{ flex: 1, background: c }} />
-          ))}
-        </div>
       </div>
     ),
     { ...ogSize, fonts },
