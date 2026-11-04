@@ -10,7 +10,7 @@ import { pageMetadata } from "@/lib/seo"
 import { site } from "@/lib/site"
 import { shortName } from "@/lib/utils"
 
-export const revalidate = 300
+export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = pageMetadata({
   title: "About us",

@@ -7,18 +7,14 @@ import JsonLd from "@/components/json-ld"
 import { Breadcrumbs } from "@/components/page-header"
 import PortableTextRenderer from "@/components/portable-text-renderer"
 import { imageAlt, imageDimensions, urlFor } from "@/lib/sanity"
-import { getNewsBySlug, getSlugs } from "@/lib/sanity-queries"
+import { getNewsBySlug } from "@/lib/sanity-queries"
 import { pageMetadata } from "@/lib/seo"
 import { absoluteUrl, site } from "@/lib/site"
 import { formatDate, shortName, titleCase } from "@/lib/utils"
 
-export const revalidate = 300
+export const dynamic = "force-dynamic"
 
 const getArticle = cache((slug: string) => getNewsBySlug(slug))
-
-export async function generateStaticParams() {
-  return (await getSlugs("news")).map((slug) => ({ slug }))
-}
 
 export async function generateMetadata({ params }: PageProps<"/news/[slug]">): Promise<Metadata> {
   const { slug } = await params

@@ -6,18 +6,14 @@ import { cache } from "react"
 import JsonLd from "@/components/json-ld"
 import { Breadcrumbs } from "@/components/page-header"
 import { imageDimensions, urlFor } from "@/lib/sanity"
-import { getGalleryBySlug, getSlugs } from "@/lib/sanity-queries"
+import { getGalleryBySlug } from "@/lib/sanity-queries"
 import { pageMetadata } from "@/lib/seo"
 import { absoluteUrl } from "@/lib/site"
 import { formatDate } from "@/lib/utils"
 
-export const revalidate = 300
+export const dynamic = "force-dynamic"
 
 const getGallery = cache((slug: string) => getGalleryBySlug(slug))
-
-export async function generateStaticParams() {
-  return (await getSlugs("gallery")).map((slug) => ({ slug }))
-}
 
 export async function generateMetadata({ params }: PageProps<"/gallery/[slug]">): Promise<Metadata> {
   const { slug } = await params

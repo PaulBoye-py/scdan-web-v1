@@ -13,7 +13,7 @@ import { pageMetadata } from "@/lib/seo"
 import { site } from "@/lib/site"
 import { formatDate, shortName, titleCase } from "@/lib/utils"
 
-export const revalidate = 300
+export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
   ...pageMetadata({

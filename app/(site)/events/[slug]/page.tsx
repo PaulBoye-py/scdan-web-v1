@@ -10,18 +10,14 @@ import { Breadcrumbs } from "@/components/page-header"
 import PortableTextRenderer from "@/components/portable-text-renderer"
 import { Button } from "@/components/ui/button"
 import { imageAlt, imageDimensions, urlFor } from "@/lib/sanity"
-import { getEventBySlug, getSlugs } from "@/lib/sanity-queries"
+import { getEventBySlug } from "@/lib/sanity-queries"
 import { pageMetadata } from "@/lib/seo"
 import { absoluteUrl, site } from "@/lib/site"
 import { formatDateRange, titleCase } from "@/lib/utils"
 
-export const revalidate = 300
+export const dynamic = "force-dynamic"
 
 const getEvent = cache((slug: string) => getEventBySlug(slug))
-
-export async function generateStaticParams() {
-  return (await getSlugs("event")).map((slug) => ({ slug }))
-}
 
 export async function generateMetadata({ params }: PageProps<"/events/[slug]">): Promise<Metadata> {
   const { slug } = await params

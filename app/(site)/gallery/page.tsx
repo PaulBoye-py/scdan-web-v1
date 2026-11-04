@@ -7,7 +7,7 @@ import { getGalleries } from "@/lib/sanity-queries"
 import { pageMetadata } from "@/lib/seo"
 import { formatDate } from "@/lib/utils"
 
-export const revalidate = 300
+export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = pageMetadata({
   title: "Gallery",

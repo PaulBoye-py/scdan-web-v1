@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next"
 import { getSitemapEntries } from "@/lib/sanity-queries"
 import { absoluteUrl } from "@/lib/site"
 
-export const revalidate = 3600
+export const dynamic = "force-dynamic"
 
 const staticRoutes: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
   { path: "/", priority: 1, changeFrequency: "weekly" },

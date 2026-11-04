@@ -5,7 +5,7 @@ import { formatDate } from "@/lib/utils"
 export const alt = "Photo album from the Special Care Dentistry Association of Nigeria"
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
-export const revalidate = 300
+export const dynamic = "force-dynamic"
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params

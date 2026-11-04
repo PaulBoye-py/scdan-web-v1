@@ -9,18 +9,14 @@ import { Breadcrumbs } from "@/components/page-header"
 import PortableTextRenderer from "@/components/portable-text-renderer"
 import { Button } from "@/components/ui/button"
 import { imageAlt, imageDimensions, urlFor } from "@/lib/sanity"
-import { getPublicationBySlug, getSlugs } from "@/lib/sanity-queries"
+import { getPublicationBySlug } from "@/lib/sanity-queries"
 import { pageMetadata } from "@/lib/seo"
 import { absoluteUrl, site } from "@/lib/site"
 import { formatDate, shortName, titleCase } from "@/lib/utils"
 
-export const revalidate = 300
+export const dynamic = "force-dynamic"
 
 const getPublication = cache((slug: string) => getPublicationBySlug(slug))
-
-export async function generateStaticParams() {
-  return (await getSlugs("publication")).map((slug) => ({ slug }))
-}
 
 export async function generateMetadata({ params }: PageProps<"/publications/[slug]">): Promise<Metadata> {
   const { slug } = await params

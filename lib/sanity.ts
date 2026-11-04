@@ -7,13 +7,13 @@ const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'dev-placeholder'
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
 const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2024-01-01'
 
-// Pages are cached by Next (ISR + on-demand revalidation), so read fresh data from the API
-// rather than the Sanity CDN, which would serve stale content right after a publish.
+// Pages render on each request (Amplify does not reliably refresh ISR pages), so read through the
+// Sanity CDN: it is fast and picks up a publish within seconds.
 export const client: SanityClient = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: false,
+  useCdn: true,
 })
 
 const builder = createImageUrlBuilder(client)
